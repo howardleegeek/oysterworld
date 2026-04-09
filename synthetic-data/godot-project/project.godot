@@ -1,0 +1,33 @@
+; PhysicalFish Demo — Godot Project Configuration
+; Simple egocentric grasping scene for synthetic data generation
+
+[application]
+config/name="PhysicalFish Synthetic Data Generator"
+config/description="Generate physics-accurate egocentric manipulation data for world model training"
+run/main_scene="res://scenes/grasping_scene.tscn"
+config/features=PackedStringArray("4.2", "Mobile")
+boot_splash/bg_color=Color(0.141176, 0.141176, 0.141176, 1)
+
+[display]
+window/size/viewport_width=640
+window/size/viewport_height=480
+window/size/resizable=false
+window/vsync/vsync_mode=0
+
+[physics]
+3d/physics_engine="GodotPhysics3D"
+3d/default_gravity=9.8
+3d/default_gravity_vector=Vector3(0, -1, 0)
+
+[rendering]
+renderer/rendering_method="mobile"
+textures/vram_compression/import_etc2_astc=true
+
+[autoload]
+Config="*res://scripts/config.gd"
+Generator="*res://scripts/generator.gd"
+
+[layer_names]
+3d_physics/layer_1="objects"
+3d_physics/layer_2="hand"
+3d_physics/layer_3="ground"

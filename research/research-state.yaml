@@ -1,0 +1,61 @@
+project: oysterworld-wow-factor
+question: >
+  What is the technically differentiated WOW factor for OysterWorld that would
+  impress Paradigm-level deep-tech investors? How to build a full-stack demo
+  (camera capture → 3D AutoResearch → ZK-verified on-chain) that no one else has?
+
+phase: inner_loop
+status: first_experiment_complete
+
+hypotheses:
+  - id: H1
+    text: "用公开真实数据(Open X-Embodiment)跑通AutoResearch闭环 → 证明系统能提升合成扩增质量"
+    status: partially_confirmed
+    priority: 1
+    result: "10条真实轨迹baseline=0.417, 优化后=0.850 (+0.279), 50迭代"
+  - id: H2
+    text: "TEE包装仿真 → 硬件证明数据完整性 → 上链 → 第一个可验证的Physical AI数据"
+    status: untested
+    priority: 2
+  - id: H3
+    text: "实时3D可视化 → 看到优化在发生 → 视觉WOW"
+    status: untested
+    priority: 3
+  - id: H4
+    text: "DrEureka LLM自动调参替代手动Bayesian → 零人类调参的物理优化"
+    status: untested
+    priority: 1
+
+metrics:
+  primary: "investor_wow_score"
+  proxy: "technical_differentiation_count"
+
+literature_coverage:
+  autoresearch_papers: complete  # Karpathy loop, Shopify adoption, 630-line pattern
+  sim_to_real_competitors: complete  # NVIDIA Isaac, DeepMind RT-X, pi0, TRI, DexFlyWheel
+  zkml_landscape: complete  # EZKL, Modulus, DeepProve-1, TEE path
+  physical_ai_data_market: complete  # Ocean, Vana, Sahara - none verify quality
+  dreureka_technical: complete  # RAPP mechanism, GPT-4 80 evals, 3h wall-clock
+  paper_opportunity: complete  # Gap confirmed, CoRL 2026 May 28 / ICRA 2027 Sep 2026
+
+key_findings:
+  - "Physical AI数据质量验证层是空白 - NVIDIA做生成, Google做采集, 没人做验证"
+  - "PINNs验证合成数据 = 无同类论文, 可发表"
+  - "DrEureka没做过pick-and-place抓取, 只做locomotion+在手旋转"
+  - "TEE跑PyBullet只有3-8%性能开销, 今天可部署"
+  - "Paradigm $1.5B基金三大论题全对齐"
+  - "DexFlyWheel代码未开源, 我们独立实现=独立工作"
+
+papers_catalogued: 15
+research_agents_completed: 6
+architecture_doc: research/to_human/OYSTERWORLD_ARCHITECTURE.md
+
+experiments_run: 1
+outer_loops: 0
+last_updated: 2026-04-09T04:00:00
+
+experiment_log:
+  - id: exp_001
+    type: real_data_demo
+    result: "baseline 0.417 → optimized 0.850, 50 iterations, gravity converged to 9.785"
+    insight: "验证器能区分好坏参数，但0.85距离0.9目标还差0.05 — 可能需要更多约束或更好的优化器"

@@ -1,0 +1,121 @@
+[gd_scene load_steps=8 format=3 uid="uid://physicalfish_grasping_scene"]
+
+[ext_resource type="Script" path="res://scripts/scene_controller.gd" id="1_controller"]
+
+[sub_resource type="BoxShape3D" id="ground_shape"]
+size = Vector3(10, 0.1, 10)
+
+[sub_resource type="StandardMaterial3D" id="ground_material"]
+albedo_color = Color(0.2, 0.2, 0.25, 1)
+roughness = 0.8
+
+[sub_resource type="BoxMesh" id="ground_mesh"]
+material = SubResource("ground_material")
+size = Vector3(10, 0.1, 10)
+
+[sub_resource type="SphereShape3D" id="object_shape"]
+radius = 0.15
+
+[sub_resource type="StandardMaterial3D" id="object_material"]
+albedo_color = Color(0.9, 0.3, 0.2, 1)
+roughness = 0.4
+metallic = 0.1
+
+[sub_resource type="SphereMesh" id="object_mesh"]
+material = SubResource("object_material")
+radius = 0.15
+height = 0.3
+
+[node name="GraspingScene" type="Node3D"]
+script = ExtResource("1_controller")
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="Ground" type="StaticBody3D" parent="Environment"]
+collision_layer = 4
+collision_mask = 7
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Ground"]
+shape = SubResource("ground_shape")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Environment/Ground"]
+mesh = SubResource("ground_mesh")
+
+[node name="Lighting" type="Node3D" parent="Environment"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Environment/Lighting"]
+transform = Transform3D(0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, -0.75, 0.433013, 0, 5, 0)
+shadow_enabled = true
+shadow_bias = 0.01
+
+[node name="AmbientLight" type="OmniLight3D" parent="Environment/Lighting"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+light_energy = 0.3
+light_color = Color(0.8, 0.9, 1, 1)
+
+[node name="ObjectToGrab" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.5)
+collision_layer = 1
+collision_mask = 7
+mass = 0.5
+linear_damp = 0.1
+angular_damp = 0.1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ObjectToGrab"]
+shape = SubResource("object_shape")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ObjectToGrab"]
+mesh = SubResource("object_mesh")
+
+[node name="Grabber" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.3)
+
+[node name="Visual" type="MeshInstance3D" parent="Grabber"]
+visible = false
+
+[node name="CameraRig" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+
+[node name="EgocentricCamera" type="Camera3D" parent="CameraRig"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+fov = 70.0
+near = 0.01
+far = 100.0
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StatusLabel" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -40.0
+offset_right = 300.0
+offset_bottom = -20.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 14
+text = "PhysicalFish Synthetic Generator"
+
+[node name="ProgressLabel" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -40.0
+offset_right = -20.0
+offset_bottom = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 14
+text = "Progress: 0/0"
+horizontal_alignment = 2
